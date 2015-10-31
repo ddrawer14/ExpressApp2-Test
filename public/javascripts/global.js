@@ -29,6 +29,8 @@ function populateTable() {
     var tableContent = '';
   
     // jQuery AJAX call for JSON
+     // Using jQuery to generate a get request to the /user/userlist route on the server.
+     // This route is set to return a JSON list of users in the DB
     $.getJSON( '/users/userlist', function( data ) {
         
         // Stick our user data array into a userlist variable in the global object
@@ -44,6 +46,7 @@ function populateTable() {
         });
 
         // Inject the whole content string into our existing HTML table
+         // Modifies the DOM 
         $('#userList table tbody').html(tableContent);
         
         
@@ -99,6 +102,7 @@ function addUser(event) {
         }
 
         // Use AJAX to post the object to our adduser service
+         // POSt to /users/adduser route
         $.ajax({
             type: 'POST',
             data: newUser,
@@ -143,6 +147,7 @@ function deleteUser(event) {
     if (confirmation === true) {
 
         // If they did, do our delete
+         // HTTP Delete request to /users/deleteuser route
         $.ajax({
             type: 'DELETE',
             url: '/users/deleteuser/' + $(this).attr('rel')
